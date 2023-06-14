@@ -1,29 +1,42 @@
 class Usuario:
+    def __init__(self, nome, email, senha):
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+
+class SistemaCadastroLogin:
+    def __init__(self):
+        self.usuarios = []
+
     def cadastrar(self):
-        print('Cadastro de Usuário')
-        self.nome = input('Digite o nome: ')
-        self.email = input('Digite o e-mail: ')
-        self.senha = input('Digite a senha: ')
-        print('Usuário cadastrado com sucesso!')
+        print("Cadastro de Usuário")
+        nome = input("Digite o nome: ")
+        email = input("Digite o e-mail: ")
+        senha = input("Digite a senha: ")
+        usuario = Usuario(nome, email, senha)
+        self.usuarios.append(usuario)
+        print("Usuário cadastrado com sucesso!")
 
     def fazer_login(self):
-        print('Login')
-        email = input('Digite o e-mail: ')
-        senha = input('Digite a senha: ')
+        print("Login")
+        email = input("Digite o e-mail: ")
+        senha = input("Digite a senha: ")
 
-        if self.email == email and self.senha == senha:
-            print('Login bem-sucedido!')
-        else:
-            print('Credenciais inválidas. Por favor, tente novamente.')
+        for usuario in self.usuarios:
+            if usuario.email == email and usuario.senha == senha:
+                print("Login bem-sucedido!")
+                return
 
-sistema = Usuario()
+        print("Credenciais inválidas. Por favor, tente novamente.")
+
+sistema = SistemaCadastroLogin()
 
 while True:
-    print('1. Cadastrar novo usuário')
-    print('2. Fazer login')
-    print('3. Sair')
+    print("1. Cadastrar novo usuário")
+    print("2. Fazer login")
+    print("3. Sair")
 
-    opcao = input('Escolha uma opção: ')
+    opcao = input("Escolha uma opção: ")
 
     if opcao == '1':
         sistema.cadastrar()
@@ -32,4 +45,4 @@ while True:
     elif opcao == '3':
         break
     else:
-        print('Opção inválida. Por favor, escolha novamente.')
+        print("Opção inválida. Por favor, escolha novamente.")
